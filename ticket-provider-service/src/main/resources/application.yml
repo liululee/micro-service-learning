@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: ticket-provider-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/user-micro?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      username: root
+      password: 123456
+      minimum-idle: 5
+      idle-timeout: 30000
+      maximum-pool-size: 20
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    hibernate:
+
+      ddl-auto: update
+server:
+  port: 8001
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localpeer1:8761/eureka, http://localpeer2:8762/eureka
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      my-metadata: This-is-Ticket-Metadata
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: '*'

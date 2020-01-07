@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: feign-http-rest-service
+server:
+  port: 8004
+eureka:
+  instance:
+    hostname: ${spring.application.name}
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://localpeer1:8761/eureka, http://localpeer2:8762/eureka
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: '*'
